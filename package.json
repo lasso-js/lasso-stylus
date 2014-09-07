@@ -1,0 +1,40 @@
+{
+  "name": "raptor-optimizer-stylus",
+  "description": "RaptorJS Optimizer plugin to support compilation of Stylus dependencies",
+  "keywords": [
+    "raptor-optimizer",
+    "raptor-optimizer-plugin",
+    "stylus",
+    "css"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/raptorjs3/raptor-optimizer-stylus.git"
+  },
+  "scripts": {
+    "test": "node_modules/.bin/mocha --ui bdd --reporter spec ./test && node_modules/.bin/jshint lib/"
+  },
+  "author": "Patrick Steele-Idem <pnidem@gmail.com>",
+  "contributors": [
+    "Patrick Steele-Idem <pnidem@gmail.com>",
+    "Phillip Gates-Idem <phillip.idem@gmail.com>"
+  ],
+  "maintainers": "Patrick Steele-Idem <pnidem@gmail.com>",
+  "dependencies": {
+    "raptor-logging": "^1.0.0-beta",
+    "stylus": "^0.48.1"
+  },
+  "devDependencies": {
+    "chai": "~1.8.1",
+    "jshint": "^2.5.5",
+    "mocha": "~1.15.1",
+    "raptor-optimizer": "^1.0.2-beta"
+  },
+  "license": "Apache License v2.0",
+  "bin": {},
+  "main": "lib/raptor-optimizer-stylus-plugin.js",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "version": "1.0.0-beta"
+}
