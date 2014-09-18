@@ -12,7 +12,7 @@
         "url": "https://github.com/raptorjs3/raptor-optimizer-stylus.git"
     },
     "scripts": {
-        "test": "node_modules/.bin/mocha --ui bdd --reporter spec ./test && node_modules/.bin/jshint lib/"
+        "test": "node_modules/.bin/mocha --ui bdd --reporter spec ./test && node_modules/.bin/jshint /"
     },
     "author": "Patrick Steele-Idem <pnidem@gmail.com>",
     "contributors": [
@@ -32,7 +32,7 @@
     },
     "license": "Apache License v2.0",
     "bin": {},
-    "main": "lib/raptor-optimizer-stylus-plugin.js",
+    "main": "./optimizer-stylus-plugin.js",
     "publishConfig": {
         "registry": "https://registry.npmjs.org/"
     },
