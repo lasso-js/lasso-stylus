@@ -1,4 +1,4 @@
-raptor-optimizer-stylus
+optimizer-stylus
 =======================
 
 This plugin for the RaptorJS Optimizer provides support for rendering [Stylus](http://learnboost.github.io/stylus/) dependencies to CSS.
@@ -8,16 +8,16 @@ This plugin for the RaptorJS Optimizer provides support for rendering [Stylus](h
 First install the plugin:
 
 ```bash
-npm install raptor-optimizer-stylus --save
+npm install optimizer-stylus --save
 ```
 
 Then, enable the plugin when configuring the RaptorJS Optimizer:
 
 ```javascript
-require('raptor-optimizer').configure({
+require('optimizer').configure({
         plugins: [
             {
-                module: 'raptor-optimizer-stylus',
+                module: 'optimizer-stylus',
                 config: {
                     ... // See Configuration below
                 }
@@ -42,7 +42,7 @@ __optimizer.json:__
 
 # Configuration
 
-The configuration for the `raptor-optimizer-stylus` plugin supports the following properties:
+The configuration for the `optimizer-stylus` plugin supports the following properties:
 
 * __defines:__ An array of functions to make available to Stylus files (see [Stylus API » define](https://github.com/LearnBoost/stylus/blob/master/docs/js.md#definename-node))
 * __imports:__ An array of paths to Stylus files that should be globally imported to every Stylus file (see [Stylus API » import](https://github.com/LearnBoost/stylus/blob/master/docs/js.md#importpath))
@@ -54,10 +54,10 @@ The configuration for the `raptor-optimizer-stylus` plugin supports the followin
 Example configuration:
 
 ```javascript
-require('raptor-optimizer').configure({
+require('optimizer').configure({
         plugins: [
             {
-                module: 'raptor-optimizer-stylus',
+                module: 'optimizer-stylus',
                 config: {
                     includes: [nodePath.join(__dirname, 'stylus/mixins/')],
                     use: function(stylus) {

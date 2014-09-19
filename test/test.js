@@ -7,9 +7,9 @@ var nodePath = require('path');
 var fs = require('fs');
 
 var stylusPlugin = require('../'); // Load this module just to make sure it works
-var raptorOptimizer = require('raptor-optimizer');
+var optimizer = require('optimizer');
 
-describe('raptor-optimizer-stylus' , function() {
+describe('optimizer-stylus' , function() {
 
     beforeEach(function(done) {
         for (var k in require.cache) {
@@ -22,7 +22,7 @@ describe('raptor-optimizer-stylus' , function() {
 
     it('should render a simple stylus dependency', function(done) {
 
-        var pageOptimizer = raptorOptimizer.create({
+        var pageOptimizer = optimizer.create({
                 fileWriter: {
                     fingerprintsEnabled: false,
                     outputDir: nodePath.join(__dirname, 'static')
@@ -57,7 +57,7 @@ describe('raptor-optimizer-stylus' , function() {
 
     it('should allow custom include paths', function(done) {
 
-        var pageOptimizer = raptorOptimizer.create({
+        var pageOptimizer = optimizer.create({
                 fileWriter: {
                     fingerprintsEnabled: false,
                     outputDir: nodePath.join(__dirname, 'static')
@@ -92,7 +92,7 @@ describe('raptor-optimizer-stylus' , function() {
 
     it('should allow custom functions', function(done) {
 
-        var pageOptimizer = raptorOptimizer.create({
+        var pageOptimizer = optimizer.create({
                 fileWriter: {
                     fingerprintsEnabled: false,
                     outputDir: nodePath.join(__dirname, 'static')
@@ -140,7 +140,7 @@ describe('raptor-optimizer-stylus' , function() {
 
     it('should allow global imports', function(done) {
 
-        var pageOptimizer = raptorOptimizer.create({
+        var pageOptimizer = optimizer.create({
                 fileWriter: {
                     fingerprintsEnabled: false,
                     outputDir: nodePath.join(__dirname, 'static')
