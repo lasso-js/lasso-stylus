@@ -1,6 +1,6 @@
 {
     "name": "lasso-stylus",
-    "description": "RaptorJS Optimizer plugin to support compilation of Stylus dependencies",
+    "description": "Lasso.js plugin to support compilation of Stylus dependencies",
     "keywords": [
         "lasso",
         "lasso-plugin",
