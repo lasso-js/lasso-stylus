@@ -9,7 +9,7 @@
     ],
     "repository": {
         "type": "git",
-        "url": "https://github.com/raptorjs/lasso-stylus.git"
+        "url": "https://github.com/lasso-js/lasso-stylus.git"
     },
     "scripts": {
         "test": "node_modules/.bin/mocha --ui bdd --reporter spec ./test && node_modules/.bin/jshint *.js"
