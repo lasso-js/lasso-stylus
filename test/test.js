@@ -41,7 +41,7 @@ describe('optimizer-stylus' , function() {
         pageOptimizer.optimizePage({
                 name: 'testPage',
                 dependencies: [
-                    nodePath.join(__dirname, 'fixtures/project1/simple.optimizer.json')
+                    nodePath.join(__dirname, 'fixtures/project1/simple.browser.json')
                 ]
             },
             function(err, optimizedPage) {
@@ -76,7 +76,7 @@ describe('optimizer-stylus' , function() {
         pageOptimizer.optimizePage({
                 name: 'testPage',
                 dependencies: [
-                    nodePath.join(__dirname, 'fixtures/project1/paths.optimizer.json')
+                    nodePath.join(__dirname, 'fixtures/project1/paths.browser.json')
                 ]
             },
             function(err, optimizedPage) {
@@ -124,7 +124,7 @@ describe('optimizer-stylus' , function() {
         pageOptimizer.optimizePage({
                 name: 'testPage',
                 dependencies: [
-                    nodePath.join(__dirname, 'fixtures/project1/functions.optimizer.json')
+                    nodePath.join(__dirname, 'fixtures/project1/functions.browser.json')
                 ]
             },
             function(err, optimizedPage) {
@@ -161,7 +161,7 @@ describe('optimizer-stylus' , function() {
         pageOptimizer.optimizePage({
                 name: 'testPage',
                 dependencies: [
-                    nodePath.join(__dirname, 'fixtures/project1/global-imports.optimizer.json')
+                    nodePath.join(__dirname, 'fixtures/project1/global-imports.browser.json')
                 ]
             },
             function(err, optimizedPage) {

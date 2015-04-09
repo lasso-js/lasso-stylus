@@ -28,9 +28,9 @@ require('optimizer').configure({
 
 # Usage
 
-Once this plugin has been enabled, you can then add Stylus dependencies to your `optimizer.json` files. The file extension for Stylus files is expected to be `.styl`. Example:
+Once this plugin has been enabled, you can then add Stylus dependencies to your `browser.json` files. The file extension for Stylus files is expected to be `.styl`. Example:
 
-__optimizer.json:__
+__browser.json:__
 
 ```json
 {
