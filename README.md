@@ -1,7 +1,7 @@
 lasso-stylus
 =======================
 
-This plugin for the Lasso.js provides support for rendering [Stylus](http://learnboost.github.io/stylus/) dependencies to CSS.
+This plugin for Lasso.js provides support for rendering [Stylus](http://learnboost.github.io/stylus/) dependencies to CSS.
 
 # Installation
 
@@ -11,7 +11,7 @@ First install the plugin:
 npm install lasso-stylus --save
 ```
 
-Then, enable the plugin when configuring the Lasso.js:
+Then, enable the plugin when configuring Lasso.js:
 
 ```javascript
 require('lasso').configure({
