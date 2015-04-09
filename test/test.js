@@ -22,7 +22,7 @@ describe('lasso-stylus' , function() {
 
     it('should render a simple stylus dependency', function(done) {
 
-        var pageOptimizer = lasso.create({
+        var myLasso = lasso.create({
                 fileWriter: {
                     fingerprintsEnabled: false,
                     outputDir: nodePath.join(__dirname, 'static')
@@ -38,7 +38,7 @@ describe('lasso-stylus' , function() {
                 ]
             });
 
-        pageOptimizer.optimizePage({
+        myLasso.optimizePage({
                 name: 'testPage',
                 dependencies: [
                     nodePath.join(__dirname, 'fixtures/project1/simple.browser.json')
@@ -57,7 +57,7 @@ describe('lasso-stylus' , function() {
 
     it('should allow custom include paths', function(done) {
 
-        var pageOptimizer = lasso.create({
+        var myLasso = lasso.create({
                 fileWriter: {
                     fingerprintsEnabled: false,
                     outputDir: nodePath.join(__dirname, 'static')
@@ -73,7 +73,7 @@ describe('lasso-stylus' , function() {
                 ]
             });
 
-        pageOptimizer.optimizePage({
+        myLasso.optimizePage({
                 name: 'testPage',
                 dependencies: [
                     nodePath.join(__dirname, 'fixtures/project1/paths.browser.json')
@@ -92,7 +92,7 @@ describe('lasso-stylus' , function() {
 
     it('should allow custom functions', function(done) {
 
-        var pageOptimizer = lasso.create({
+        var myLasso = lasso.create({
                 fileWriter: {
                     fingerprintsEnabled: false,
                     outputDir: nodePath.join(__dirname, 'static')
@@ -121,7 +121,7 @@ describe('lasso-stylus' , function() {
                 ]
             });
 
-        pageOptimizer.optimizePage({
+        myLasso.optimizePage({
                 name: 'testPage',
                 dependencies: [
                     nodePath.join(__dirname, 'fixtures/project1/functions.browser.json')
@@ -140,7 +140,7 @@ describe('lasso-stylus' , function() {
 
     it('should allow global imports', function(done) {
 
-        var pageOptimizer = lasso.create({
+        var myLasso = lasso.create({
                 fileWriter: {
                     fingerprintsEnabled: false,
                     outputDir: nodePath.join(__dirname, 'static')
@@ -158,7 +158,7 @@ describe('lasso-stylus' , function() {
                 ]
             });
 
-        pageOptimizer.optimizePage({
+        myLasso.optimizePage({
                 name: 'testPage',
                 dependencies: [
                     nodePath.join(__dirname, 'fixtures/project1/global-imports.browser.json')
