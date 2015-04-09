@@ -44,7 +44,7 @@ describe('lasso-stylus' , function() {
                     nodePath.join(__dirname, 'fixtures/project1/simple.browser.json')
                 ]
             },
-            function(err, optimizedPage) {
+            function(err, lassoPageResult) {
                 if (err) {
                     return done(err);
                 }
@@ -79,7 +79,7 @@ describe('lasso-stylus' , function() {
                     nodePath.join(__dirname, 'fixtures/project1/paths.browser.json')
                 ]
             },
-            function(err, optimizedPage) {
+            function(err, lassoPageResult) {
                 if (err) {
                     return done(err);
                 }
@@ -127,7 +127,7 @@ describe('lasso-stylus' , function() {
                     nodePath.join(__dirname, 'fixtures/project1/functions.browser.json')
                 ]
             },
-            function(err, optimizedPage) {
+            function(err, lassoPageResult) {
                 if (err) {
                     return done(err);
                 }
@@ -164,7 +164,7 @@ describe('lasso-stylus' , function() {
                     nodePath.join(__dirname, 'fixtures/project1/global-imports.browser.json')
                 ]
             },
-            function(err, optimizedPage) {
+            function(err, lassoPageResult) {
                 if (err) {
                     return done(err);
                 }
