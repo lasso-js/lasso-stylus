@@ -1,15 +1,15 @@
 {
-    "name": "optimizer-stylus",
+    "name": "lasso-stylus",
     "description": "RaptorJS Optimizer plugin to support compilation of Stylus dependencies",
     "keywords": [
-        "optimizer",
-        "optimizer-plugin",
+        "lasso",
+        "lasso-plugin",
         "stylus",
         "css"
     ],
     "repository": {
         "type": "git",
-        "url": "https://github.com/raptorjs/optimizer-stylus.git"
+        "url": "https://github.com/raptorjs/lasso-stylus.git"
     },
     "scripts": {
         "test": "node_modules/.bin/mocha --ui bdd --reporter spec ./test && node_modules/.bin/jshint *.js"
@@ -28,11 +28,11 @@
         "chai": "^1.9.1",
         "jshint": "^2.5.5",
         "mocha": "^1.21.4",
-        "optimizer": "^1.0.2"
+        "lasso": "^1.0.2"
     },
     "license": "Apache License v2.0",
     "bin": {},
-    "main": "./optimizer-stylus-plugin.js",
+    "main": "./lasso-stylus-plugin.js",
     "publishConfig": {
         "registry": "https://registry.npmjs.org/"
     },

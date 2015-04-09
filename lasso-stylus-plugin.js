@@ -57,8 +57,8 @@ function handleOptions(renderer, options) {
     return renderer;
 }
 
-module.exports = function(optimizer, config) {
-    optimizer.dependencies.registerStyleSheetType(
+module.exports = function(lasso, config) {
+    lasso.dependencies.registerStyleSheetType(
         'styl',
         {
             properties: {
@@ -71,7 +71,7 @@ module.exports = function(optimizer, config) {
                 'use': 'array'
             },
 
-            init: function(optimizerContext, callback) {
+            init: function(lassoContext, callback) {
                 if (!this.path) {
                     return callback(new Error('"path" is required for a stylus dependency'));
                 }
@@ -94,7 +94,7 @@ module.exports = function(optimizer, config) {
                 callback();
             },
 
-            read: function(optimizerContext, callback) {
+            read: function(lassoContext, callback) {
                 var path = this.path;
                 var _this = this;
 
@@ -126,7 +126,7 @@ module.exports = function(optimizer, config) {
                 return this.path;
             },
 
-            getLastModified: function(optimizerContext, callback) {
+            getLastModified: function(lassoContext, callback) {
                 return callback(null, -1);
             }
         });
