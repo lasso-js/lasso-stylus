@@ -38,7 +38,7 @@ describe('lasso-stylus' , function() {
                 ]
             });
 
-        myLasso.optimizePage({
+        myLasso.lassoPage({
                 name: 'testPage',
                 dependencies: [
                     nodePath.join(__dirname, 'fixtures/project1/simple.browser.json')
@@ -73,7 +73,7 @@ describe('lasso-stylus' , function() {
                 ]
             });
 
-        myLasso.optimizePage({
+        myLasso.lassoPage({
                 name: 'testPage',
                 dependencies: [
                     nodePath.join(__dirname, 'fixtures/project1/paths.browser.json')
@@ -121,7 +121,7 @@ describe('lasso-stylus' , function() {
                 ]
             });
 
-        myLasso.optimizePage({
+        myLasso.lassoPage({
                 name: 'testPage',
                 dependencies: [
                     nodePath.join(__dirname, 'fixtures/project1/functions.browser.json')
@@ -158,7 +158,7 @@ describe('lasso-stylus' , function() {
                 ]
             });
 
-        myLasso.optimizePage({
+        myLasso.lassoPage({
                 name: 'testPage',
                 dependencies: [
                     nodePath.join(__dirname, 'fixtures/project1/global-imports.browser.json')
