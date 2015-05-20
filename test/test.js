@@ -49,7 +49,7 @@ describe('lasso-stylus' , function() {
                     return done(err);
                 }
 
-                var output = fs.readFileSync(nodePath.join(__dirname, 'static/testPage.css'), 'utf8');
+                var output = fs.readFileSync(nodePath.join(__dirname, 'static/testPage.css'), {encoding: 'utf8'});
                 expect(output).to.equal("body {\n  font: 14px Arial, sans-seri;\n}\n");
                 done();
             });
@@ -84,7 +84,7 @@ describe('lasso-stylus' , function() {
                     return done(err);
                 }
 
-                var output = fs.readFileSync(nodePath.join(__dirname, 'static/testPage.css'), 'utf8');
+                var output = fs.readFileSync(nodePath.join(__dirname, 'static/testPage.css'), {encoding: 'utf8'});
                 expect(output).to.equal(".foo {\n  color: #f00;\n}\n.bar {\n  font-size: 2px;\n  -webkit-border-radius: 5px;\n  -moz-border-radius: 5px;\n  border-radius: 5px;\n  opacity: 0.5;\n}\n");
                 done();
             });
@@ -132,7 +132,7 @@ describe('lasso-stylus' , function() {
                     return done(err);
                 }
 
-                var output = fs.readFileSync(nodePath.join(__dirname, 'static/testPage.css'), 'utf8');
+                var output = fs.readFileSync(nodePath.join(__dirname, 'static/testPage.css'), {encoding: 'utf8'});
                 expect(output).to.equal(".add {\n  opacity: 0.7;\n  z-index: 1;\n}\n");
                 done();
             });
@@ -169,7 +169,7 @@ describe('lasso-stylus' , function() {
                     return done(err);
                 }
 
-                var output = fs.readFileSync(nodePath.join(__dirname, 'static/testPage.css'), 'utf8');
+                var output = fs.readFileSync(nodePath.join(__dirname, 'static/testPage.css'), {encoding: 'utf8'});
                 expect(output).to.equal(".foo {\n  color: #00f;\n}\n");
                 done();
             });
