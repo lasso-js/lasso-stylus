@@ -73,7 +73,9 @@ module.exports = function(lasso, config) {
 
             init: function(lassoContext, callback) {
                 if (!this.path) {
-                    return callback(new Error('"path" is required for a stylus dependency'));
+                    var error = new Error('"path" is required');
+                    if (callback) return callback(error);
+                    throw error;
                 }
 
                 var _this = this;
@@ -91,33 +93,38 @@ module.exports = function(lasso, config) {
 
                 this.path = this.resolvePath(this.path);
 
-                callback();
+                if (callback) callback();
             },
 
             read: function(lassoContext, callback) {
-                var path = this.path;
-                var _this = this;
+                return new Promise((resolve, reject) => {
+                    callback = callback || function (err, res) {
+                        return err ? reject(err) : resolve(res);
+                    };
+
+                    var path = this.path;
+                    var _this = this;
 
 
-                fs.readFile(path, {encoding: 'utf8'}, function(err, stylusCode) {
-                    if (err) {
-                        return callback(err);
-                    }
-
-                    var renderer = stylus(stylusCode)
-                        .set('filename', path);
-
-                    renderer = handleOptions(renderer, config);
-                    renderer = handleOptions(renderer, _this);
-
-                    renderer.include(nodePath.dirname(path));
-
-                    renderer.render(function(err, css) {
+                    fs.readFile(path, {encoding: 'utf8'}, function(err, stylusCode) {
                         if (err) {
                             return callback(err);
                         }
 
-                        callback(null, css);
+                        var renderer = stylus(stylusCode).set('filename', path);
+
+                        renderer = handleOptions(renderer, config);
+                        renderer = handleOptions(renderer, _this);
+
+                        renderer.include(nodePath.dirname(path));
+
+                        renderer.render(function(err, css) {
+                            if (err) {
+                                return callback(err);
+                            }
+
+                            callback(null, css);
+                        });
                     });
                 });
             },
@@ -127,7 +134,8 @@ module.exports = function(lasso, config) {
             },
 
             getLastModified: function(lassoContext, callback) {
-                return callback(null, -1);
+                return callback ? callback(null, -1) : -1;
             }
-        });
+        }
+    );
 };

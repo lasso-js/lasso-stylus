@@ -1,0 +1,10 @@
+.foo {
+  color: #f00;
+}
+.bar {
+  font-size: 2px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  opacity: 0.5;
+}

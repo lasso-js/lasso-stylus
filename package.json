@@ -22,15 +22,15 @@
     "maintainers": "Patrick Steele-Idem <pnidem@gmail.com>",
     "dependencies": {
         "raptor-logging": "^1.0.1",
-        "stylus": "^0.48.1"
+        "stylus": "^0.54.5"
     },
     "devDependencies": {
-        "chai": "^1.9.1",
+        "chai": "^4.1.2",
         "jshint": "^2.5.5",
-        "mocha": "^1.21.4",
-        "lasso": "^1.8.4"
+        "mocha": "^4.0.1",
+        "lasso": "^3.0.0"
     },
-    "license": "Apache License v2.0",
+    "license": "Apache-2.0",
     "bin": {},
     "main": "./lasso-stylus-plugin.js",
     "publishConfig": {
