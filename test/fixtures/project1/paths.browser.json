@@ -1,5 +1,0 @@
-{
-    "dependencies": [
-        { "path": "paths.styl", "includes": [ "./mixins2"] }
-    ]
-}

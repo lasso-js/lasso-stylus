@@ -1,179 +1,106 @@
 'use strict';
-var chai = require('chai');
-chai.Assertion.includeStack = true;
-require('chai').should();
-var expect = require('chai').expect;
 var nodePath = require('path');
+require('chai').config.includeStack = true;
+
+var rmdirRecursive = require('./util').rmdirRecursive;
+var buildDir = nodePath.join(__dirname, 'build');
+
+var lasso = require('lasso');
+var lassoStylusPlugin = require('../');
 var fs = require('fs');
 
-var stylusPlugin = require('../'); // Load this module just to make sure it works
-var lasso = require('lasso');
+describe('lasso-stylus/plugin' , function() {
+    require('./autotest').scanDir(
+        nodePath.join(__dirname, 'autotests-plugin'),
+        function (dir, helpers, done) {
+            var main;
+            var testFile = nodePath.join(dir, 'test.js');
+            var testName = nodePath.basename(dir);
+            var pageName = testName;
 
-describe('lasso-stylus' , function() {
-
-    beforeEach(function(done) {
-        for (var k in require.cache) {
-            if (require.cache.hasOwnProperty(k)) {
-                delete require.cache[k];
+            if (fs.existsSync(testFile)) {
+                main = require(testFile);
+            } else {
+                main = {};
             }
-        }
-        done();
-    });
 
-    it('should render a simple stylus dependency', function(done) {
-
-        var myLasso = lasso.create({
-                fileWriter: {
-                    fingerprintsEnabled: false,
-                    outputDir: nodePath.join(__dirname, 'static')
-                },
-                bundlingEnabled: true,
-                plugins: [
-                    {
-                        plugin: stylusPlugin,
-                        config: {
-
+            var lassoConfig = main.getLassoConfig && main.getLassoConfig(lassoStylusPlugin);
+            if (!lassoConfig) {
+                lassoConfig = {
+                    fingerprintsEnabled: true,
+                    urlPrefix: '/static',
+                    plugins: [
+                        {
+                            plugin: lassoStylusPlugin,
+                            config: {}
                         }
-                    }
-                ]
-            });
+                    ]
+                };
+            }
 
-        myLasso.lassoPage({
-                name: 'testPage',
-                dependencies: [
-                    nodePath.join(__dirname, 'fixtures/project1/simple.browser.json')
-                ]
-            },
-            function(err, lassoPageResult) {
-                if (err) {
-                    return done(err);
+            if (!lassoConfig.outputDir) {
+                lassoConfig.outputDir = nodePath.join(buildDir, pageName);
+            }
+
+            rmdirRecursive(lassoConfig.outputDir);
+
+            var myLasso = lasso.create(lassoConfig, dir);
+
+            var inputs;
+
+            let lassoOptions = (main.getLassoOptions && main.getLassoOptions(dir)) || {};
+
+
+            let check = main.check;
+
+            inputs = [
+                {
+                    lassoOptions,
+                    check
                 }
+            ];
 
-                var output = fs.readFileSync(nodePath.join(__dirname, 'static/testPage.css'), {encoding: 'utf8'});
-                expect(output).to.equal("body {\n  font: 14px Arial, sans-seri;\n}\n");
-                done();
-            });
-    });
+            var checkError = main.checkError;
 
-    it('should allow custom include paths', function(done) {
+            if (!lassoOptions.pageName) {
+                lassoOptions.pageName = pageName;
+            }
 
-        var myLasso = lasso.create({
-                fileWriter: {
-                    fingerprintsEnabled: false,
-                    outputDir: nodePath.join(__dirname, 'static')
-                },
-                bundlingEnabled: true,
-                plugins: [
-                    {
-                        plugin: stylusPlugin,
-                        config: {
-                            includes: [nodePath.join(__dirname, 'fixtures/project1/mixins')]
+            if (!lassoOptions.from) {
+                lassoOptions.from = dir;
+            }
+
+            myLasso.lassoPage(lassoOptions)
+                .then((lassoPageResult) => {
+                    if (checkError) {
+                        return done('Error expected');
+                    }
+
+                    if (main.check) {
+                        main.check(lassoPageResult, helpers);
+                    } else {
+                        var cssFile = lassoPageResult.getCSSFiles()[0];
+                        var css;
+                        if (cssFile) {
+                            css = fs.readFileSync(cssFile, { encoding: 'utf8' });
+                        } else {
+                            css = '';
                         }
+
+                        helpers.compare(css, '.css');
                     }
-                ]
-            });
 
-        myLasso.lassoPage({
-                name: 'testPage',
-                dependencies: [
-                    nodePath.join(__dirname, 'fixtures/project1/paths.browser.json')
-                ]
-            },
-            function(err, lassoPageResult) {
-                if (err) {
-                    return done(err);
-                }
-
-                var output = fs.readFileSync(nodePath.join(__dirname, 'static/testPage.css'), {encoding: 'utf8'});
-                expect(output).to.equal(".foo {\n  color: #f00;\n}\n.bar {\n  font-size: 2px;\n  -webkit-border-radius: 5px;\n  -moz-border-radius: 5px;\n  border-radius: 5px;\n  opacity: 0.5;\n}\n");
-                done();
-            });
-    });
-
-    it('should allow custom functions', function(done) {
-
-        var myLasso = lasso.create({
-                fileWriter: {
-                    fingerprintsEnabled: false,
-                    outputDir: nodePath.join(__dirname, 'static')
-                },
-                bundlingEnabled: true,
-                plugins: [
-                    {
-                        plugin: stylusPlugin,
-                        config: {
-                            use: function(stylus) {
-                                stylus.define('add', function(a, b) {
-                                    a = parseFloat(a);
-                                    b = parseFloat(b);
-                                    return a+b;
-                                });
-                            },
-                            define: {
-                                sub: function(a, b) {
-                                    a = parseFloat(a);
-                                    b = parseFloat(b);
-                                    return a-b;
-                                }
-                            }
-                        }
+                    var flushResult = lasso.flushAllCaches(done);
+                    if (flushResult) flushResult.then(done);
+                })
+                .catch((err) => {
+                    if (checkError) {
+                        checkError(err);
+                        done();
+                    } else {
+                        throw err;
                     }
-                ]
-            });
-
-        myLasso.lassoPage({
-                name: 'testPage',
-                dependencies: [
-                    nodePath.join(__dirname, 'fixtures/project1/functions.browser.json')
-                ]
-            },
-            function(err, lassoPageResult) {
-                if (err) {
-                    return done(err);
-                }
-
-                var output = fs.readFileSync(nodePath.join(__dirname, 'static/testPage.css'), {encoding: 'utf8'});
-                expect(output).to.equal(".add {\n  opacity: 0.7;\n  z-index: 1;\n}\n");
-                done();
-            });
-    });
-
-    it('should allow global imports', function(done) {
-
-        var myLasso = lasso.create({
-                fileWriter: {
-                    fingerprintsEnabled: false,
-                    outputDir: nodePath.join(__dirname, 'static')
-                },
-                bundlingEnabled: true,
-                plugins: [
-                    {
-                        plugin: stylusPlugin,
-                        config: {
-                            imports: [
-                                nodePath.join(__dirname, 'fixtures/project1/variables.styl')
-                            ]
-                        }
-                    }
-                ]
-            });
-
-        myLasso.lassoPage({
-                name: 'testPage',
-                dependencies: [
-                    nodePath.join(__dirname, 'fixtures/project1/global-imports.browser.json')
-                ]
-            },
-            function(err, lassoPageResult) {
-                if (err) {
-                    return done(err);
-                }
-
-                var output = fs.readFileSync(nodePath.join(__dirname, 'static/testPage.css'), {encoding: 'utf8'});
-                expect(output).to.equal(".foo {\n  color: #00f;\n}\n");
-                done();
-            });
-    });
-
-
+                })
+                .catch(done);
+        });
 });
